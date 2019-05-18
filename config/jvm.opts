@@ -113,7 +113,7 @@
 -Dcom.sun.management.jmxremote.local.only=false
 -Dcom.sun.management.jmxremote.port=1099
 -Dcom.sun.management.jmxremote.rmi.port=1099
--Djava.rmi.server.hostname=127.0.0.1
+-Djava.rmi.server.hostname=0.0.0.0
 
 # Elasticsearch 5.0.0 will throw an exception on unquoted field names in JSON.
 # If documents were already indexed with unquoted fields in a previous version

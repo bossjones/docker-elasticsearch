@@ -44,6 +44,15 @@ sed -i -e "s@\\-Xmx2g@${DEFAULT_ES_JAVA_INITIAL_HEAP_SIZE}@g" $ELASTICSEARCH_HOM
 ./bin/elasticsearch_logging_discovery >> ./config/elasticsearch.yml
 chown -Rv elasticsearch:elasticsearch ./config/elasticsearch.yml
 
-tree
+# tree
+# Allow user specify custom CMD, maybe bin/elasticsearch itself
+# for example to directly specify `-E` style parameters for elasticsearch on k8s
+# or simply to run /bin/bash to check the image
+if [[ "$MEMORY_LOCK" == "true" ]]; then
+    echo "set memlock limit"
+    ulimit -l unlimited
+fi
+
+/sbin/sysctl -w vm.max_map_count=262144
 
 exec su elasticsearch -c ./bin/es-docker
